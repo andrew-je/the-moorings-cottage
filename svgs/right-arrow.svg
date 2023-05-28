@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="18px" viewBox="0 0 28 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Crofter_arrow-link</title>
+    <g id="Icons-&amp;-Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Icons" transform="translate(-150.000000, -597.000000)" stroke="#768894">
+            <g id="sprites" transform="translate(123.000000, 583.000000)">
+                <g id="Group" transform="translate(40.484887, 22.971570) scale(-1, 1) rotate(-180.000000) translate(-40.484887, -22.971570) translate(27.125994, 15.337917)">
+                    <line x1="26.159574" y1="7.63365282" x2="14.8598594" y2="0.441797657" id="Path"></line>
+                    <polyline id="Path" points="14.8598594 14.825508 26.159574 7.63365282 0.558210863 7.63365282"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
