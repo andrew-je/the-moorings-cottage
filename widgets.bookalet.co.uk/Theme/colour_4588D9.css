@@ -1,0 +1,40 @@
+.bookaletwidget .header {
+    background-color: #4588D9;
+    color: #ECF3FB;
+}
+.bookaletwidget .subheader, .bookaletwidget .divider {border-top: 2px solid #4588D9; }
+
+.bookaletwidget a {color: #3E7AC3; }
+.bookaletwidget input:focus, .bookaletwidget select:focus, .bookaletwidget textarea:focus {border: 1px solid #295182; }
+
+.bookaletwidget .button {
+    color: #ECF3FB;
+    background-color: #4588D9;
+    border: 1px solid #295182;
+}
+.bookaletwidget .bookingsummary_header {color: #3E7AC3;}
+.bookaletwidget .bookingsummary_total {color: #3E7AC3;}
+.bookaletwidget .bookingsdate a {color: #3E7AC3;}
+.bookaletwidget .money span {color: #3E7AC3;}
+.bookaletwidget .ratecard th {border-bottom: 1px solid #3E7AC3;}
+
+.bookaletwidget .search_results_header a:hover{border: 1px solid #3E7AC3; }
+
+.bookaletwidget .calendar_controls_left  a:before { border-color: transparent #4588D9 transparent transparent; }
+.bookaletwidget .calendar_controls_right a:after  { border-color: transparent transparent transparent #4588D9; }
+
+.bookaletwidget .picker__button--today:before, .bookaletwidget .picker__day--today:before { border-top-color: #295182; }
+.bookaletwidget .picker__day--selected, .bookaletwidget .picker__day--selected:hover, .bookaletwidget .picker--focused .bookaletwidget .picker__day--selected {
+    color: #ECF3FB;
+    background: #4588D9;
+}
+.bookaletwidget .picker__nav--prev:hover, .bookaletwidget .picker__nav--next:hover, .bookaletwidget .picker__day--infocus:hover, .bookaletwidget .picker__day--outfocus:hover {
+    background: #8FB7E8;
+}
+.bookaletwidget .picker__day--highlighted {
+    border-color: #295182;
+}
+.bookaletwidget .picker__button--today:hover, .bookaletwidget .picker__button--clear:hover, .bookaletwidget .picker__button--close:hover {
+    background: #8FB7E8;
+    border-bottom-color: #8FB7E8;
+}
