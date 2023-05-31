@@ -1640,6 +1640,10 @@ footer .outer__footer > a {
   }
 }
 @media (max-width: 767px) {
+  .header .outer__header {
+    min-height: 60px;
+  }
+  
   .contact__wrapper .double {
     padding-bottom: 30px;
   }
