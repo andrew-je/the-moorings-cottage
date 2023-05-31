@@ -50,7 +50,7 @@ header {
   z-index: 3;
 }
 header .outer__header {
-  min-height: 60px;
+  max-height: 60px;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
