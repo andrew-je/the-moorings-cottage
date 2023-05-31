@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header>
+		<div class="outer__header">
+			<div class="menu__button">
+				<a href="#">
+					<img src="img/menu.svg" alt="menu">
+				</a>
+			</div>
+			<div class="logo">
+				<a href="home.html"><img src="img/logo.svg" alt="logo"></a>
+			</div>
+			<div class="booking">
+				<a href="booking.html">BOOKING & AVAILABILITY</a>
+			</div>
+		</div>
+	</header>
+	<div class="menu__wrapper">
+		<div class="inner__menu">
+			<div class="menu__close">
+				<a href="#"><img src="img/exit.svg" alt="exit"></a>
+			</div>
+			<ul>
+				<li><a href="cottage.html">The Cottage</a></li>
+				<li><a href="gallery.html">Gallery</a></li>
+				<li><a href="booking.html">Booking & Availability</a></li>
+				<li><a href="review.html">Reviews</a></li>
+				<li><a href="area.html">The Local Area</a></li>
+				<li><a href="terms.html">Terms & Conditions</a></li>
+				<li><a href="contact.html">Contact & Directions</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="contact__wrapper">
+		<div class="container smaller">
+			<div class="outer__contact">
+				<h2>Contact & Directions</h2>
+				<div class="double">
+					<div class="directions">
+						<h6>The Moorings <br> Y Felinheli <br> Gwynedd</h6>
+						<ul>
+							<li><a href="tel:+4407836616502">+44 (0)7836616502</a></li>
+							<li><a href="mailto:themooringscottage@gmail.com">themooringscottage@gmail.com</a></li>
+						</ul>
+						<div class="button__wrapper">
+							<a href="https://www.google.com/maps/place/Y+Felinheli/@53.186394,-4.2088062,19z/data=!4m5!3m4!1s0x4865074555127ea1:0x91880f847b8696c9!8m2!3d53.181052!4d-4.212695" target="_blank">GET DIRECTRIONS</a>
+						</div>
+					</div>
+					<div class="desc__">
+						<div class="elem__">
+							<h6>The location</h6>
+							<p>Bangor 5 miles; Caernarfon 5 miles; Llanberis 6 miles.</p>
+							<p>Y Felinheli, formerly know as Port Dinorwic, is situated on the beautiful Menai Strait between the historic town of Caernarfon and the cathedral city of Bangor.</p>
+							<p>Home to a small, established yachting marina with an interesting lock, this small village also has a couple of pubs, a restaurant and cafe in the dock area, a shop and Post Office, a beautician, a hairdresser and several great restaurants on the nearby Island of Anglesey.</p>
+							<p>Visitors to this lovely region are spoilt for choice, with stunning Snowdonia, the beautiful Llyn Peninsula, or the sandy beaches of the Isle of Anglesey all within easy reach.</p>
+						</div>
+
+						<div class="elem__">
+							<h6>Get social</h6>
+							<p>Already stayed at The Moorings? Feel free to add some of your holiday photos and reviews as a visitor post on Facebook or tag us in your posts and stories on Instagram. We love to hear what you got upto on your holidays!</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="map"></div>
+			<script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+        ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});</script>
+		<script>
+			let map;
+
+			async function initMap() {
+			  const { Map } = await google.maps.importLibrary("maps");
+			  map = new Map(document.getElementById("map"), {
+			    center: { lat: 53.17894247991406,  lng: -4.215307599999999},
+			    zoom: 12,
+			    styles : [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dadada"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
+]
+			  });
+			  new google.maps.Marker({
+			    position: {lat: 53.17894247991406,  lng: -4.215307599999999},
+			    map,
+			    title: "Felinheli Terrace, Y Felinheli",
+			  });
+			}
+
+			initMap();
+		</script>
+	
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="outer__footer">
+				<a href="home.html"><img src="img/logo_footer.svg" alt="logo"></a>
+				<ul>
+					<li>Felinheli Terrace, Y Felinheli</li>
+					<li><a href="tel:+440774204203">+44 (0)774204203</a><span class="spacer">|</span><a href="tel:+4407836616502">+44 (0)7836616502</a></li>
+					<li><a href="mailto:themooringscottage@gmail.com">themooringscottage@gmail.com</a></li>
+				</ul>
+				<div class="socials">
+					<ul>
+						<li><a href="https://m.facebook.com/profile.php?id=111776223882344&ref=content_filter" target="_blank"><img src="img/facebook.svg" alt="facebook"></a></li>
+						<li><a href="https://www.instagram.com/themooringscottage/" target="_blank"><img src="img/instagram.svg" alt="instagram"></a></li>
+						<li><a href="https://www.twitter.com/mooringscottage/" target="_blank"><img src="img/twitter.svg" alt="twitter"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script
+  src="https://code.jquery.com/jquery-3.7.0.js"
+  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+  crossorigin="anonymous"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
