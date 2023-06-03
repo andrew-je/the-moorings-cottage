@@ -1619,6 +1619,7 @@ footer .outer__footer > a {
   header .outer__header {
     padding-left: 15px;
     padding-right: 15px;
+    min-height: 60px;
   }
 
   .cottage__wrapper .outer__cottage .double__ .media > img {
@@ -1639,11 +1640,7 @@ footer .outer__footer > a {
     height: 480px;
   }
 }
-@media (max-width: 767px) {
-  .header .outer__header {
-    min-height: 60px !important;
-  }
-  
+@media (max-width: 767px) {  
   .contact__wrapper .double {
     padding-bottom: 30px;
   }
