@@ -500,10 +500,10 @@ footer .outer__footer > a {
   padding-top: 80%;
   overflow: hidden;
 }
-.plan__wrapper .gallery .elem:hover img {
+/* .plan__wrapper .gallery .elem:hover img {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
-}
+} */
 .plan__wrapper .gallery .elem img {
   position: absolute;
   left: 0px;
@@ -612,10 +612,10 @@ footer .outer__footer > a {
   overflow: hidden;
   padding-bottom: 64%;
 }
-.gallery__cottage .bottom > .image:hover img {
+/* .gallery__cottage .bottom > .image:hover img {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
-}
+} */
 .gallery__cottage .bottom > .image img {
   position: absolute;
   left: 0px;
@@ -645,10 +645,10 @@ footer .outer__footer > a {
   padding-top: 30%;
   overflow: hidden;
 }
-.gallery__cottage .top .breakfast:hover img {
+/* .gallery__cottage .top .breakfast:hover img {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
-}
+} */
 .gallery__cottage .top .breakfast img {
   position: absolute;
   left: 0px;
@@ -666,10 +666,10 @@ footer .outer__footer > a {
   position: relative;
   overflow: hidden;
 }
-.gallery__cottage .top .front:hover img {
+/* .gallery__cottage .top .front:hover img {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
-}
+} */
 .gallery__cottage .top .front img {
   -o-object-fit: cover;
      object-fit: cover;
@@ -732,10 +732,10 @@ footer .outer__footer > a {
 .main__gallery .outer__gallery .grid .elem__gallery.longer {
   padding-top: 142%;
 }
-.main__gallery .outer__gallery .grid .elem__gallery:hover > img {
+/* .main__gallery .outer__gallery .grid .elem__gallery:hover > img {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
-}
+} */
 .main__gallery .outer__gallery .grid .elem__gallery > img {
   position: absolute;
   top: 0px;
@@ -895,10 +895,10 @@ footer .outer__footer > a {
   position: relative;
   overflow: hidden;
 }
-.long__image .media:hover > img {
+/* .long__image .media:hover > img {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
-}
+} */
 .long__image .media > img {
   position: absolute;
   left: 0px;
@@ -1240,10 +1240,10 @@ footer .outer__footer > a {
   cursor: pointer;
   overflow: hidden;
 }
-.slider__wrapper .slider .slide:hover img {
+/* .slider__wrapper .slider .slide:hover img {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
-}
+} */
 .slider__wrapper .slider .slide img {
   -webkit-transition: .4s ease all;
   transition: .4s ease all;
