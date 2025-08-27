@@ -1,0 +1,24 @@
+/* Import the original CSS */
+@import url('/css/style.css');
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  margin-top: 60px; /* Account for fixed header */
+}
+
+/* React-specific styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container.smaller {
+  max-width: 1000px;
+}

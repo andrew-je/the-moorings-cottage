@@ -1,0 +1,169 @@
+/* Contact page specific styles */
+.contact__wrapper {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.contact__wrapper .top__ {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.contact__wrapper .top__ h2 {
+  margin-bottom: 20px;
+}
+
+.contact__wrapper .top__ p {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact__content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contact__info {
+  margin-bottom: 60px;
+}
+
+.contact__info h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+}
+
+.contact__details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.contact__item {
+  text-align: center;
+  padding: 30px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.contact__item h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.contact__item p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.contact__item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.contact__item a:hover {
+  text-decoration: underline;
+}
+
+.directions__info {
+  margin-bottom: 60px;
+}
+
+.directions__info h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+}
+
+.directions__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.directions__text h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.directions__text p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.directions__map {
+  text-align: center;
+}
+
+.directions__map img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.local__info h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+}
+
+.amenities__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.amenity__item {
+  padding: 25px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.amenity__item h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.amenity__item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.amenity__item li {
+  padding: 5px 0;
+  color: #666;
+  position: relative;
+  padding-left: 20px;
+}
+
+.amenity__item li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .contact__details {
+    grid-template-columns: 1fr;
+  }
+  
+  .directions__content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .amenities__grid {
+    grid-template-columns: 1fr;
+  }
+}
