@@ -10,7 +10,7 @@ A modern React-based website for The Moorings Cottage, a beautiful holiday renta
 - **Smooth Navigation**: React Router for seamless page transitions
 - **Image Slider**: Swiper.js integration for the cottage image carousel
 - **Booking Integration**: Embedded booking calendar from Bookalet
-- **Google Analytics**: Tracked with Google Analytics
+- **Google Analytics**: Comprehensive tracking with Universal Analytics
 - **SEO Optimized**: Proper meta tags and semantic HTML
 
 ## 🛠️ Technology Stack
@@ -18,10 +18,11 @@ A modern React-based website for The Moorings Cottage, a beautiful holiday renta
 - **Frontend**: React 18
 - **Build Tool**: Vite
 - **Routing**: React Router DOM
-- **Styling**: CSS3 with custom components
+- **Styling**: Modern CSS with custom properties
 - **Image Slider**: Swiper.js
+- **Analytics**: Google Analytics (Universal Analytics)
 - **Icons**: Custom SVG icons
-- **Fonts**: Gill Sans and Granjon
+- **Fonts**: Inter and Playfair Display (Google Fonts)
 
 ## 📁 Project Structure
 
@@ -30,7 +31,8 @@ src/
 ├── components/
 │   ├── Header.jsx          # Navigation header with mobile menu
 │   ├── Footer.jsx          # Footer with contact info
-│   └── Header.css          # Header-specific styles
+│   ├── Header.css          # Header-specific styles
+│   └── Footer.css          # Footer-specific styles
 ├── pages/
 │   ├── Home.jsx            # Homepage with hero, slider, and booking
 │   ├── Cottage.jsx         # Cottage details and features
@@ -41,15 +43,20 @@ src/
 │   ├── Terms.jsx           # Terms and conditions
 │   ├── Contact.jsx         # Contact info and directions
 │   └── *.css               # Page-specific styles
+├── hooks/
+│   └── useAnalytics.js     # Analytics hooks for React
+├── services/
+│   └── analytics.js        # Google Analytics service
+├── config/
+│   └── analytics.js        # Analytics configuration
 ├── App.jsx                 # Main app component with routing
-├── App.css                 # Global styles
+├── App.css                 # Global styles and design system
 └── main.jsx                # App entry point
 
 public/
-├── css/                    # Original CSS files
-├── fonts/                  # Custom fonts
+├── fonts/                  # Custom fonts (if needed)
 ├── img/                    # All images and icons
-└── js/                     # Original JavaScript files
+└── index.html              # HTML template
 ```
 
 ## 🚀 Getting Started
@@ -109,8 +116,28 @@ npm run preview
 - **Responsive Layout**: Mobile-first design approach
 - **Smooth Animations**: CSS transitions and React-based animations
 - **Interactive Elements**: Hover effects, modal windows, and smooth scrolling
-- **Typography**: Custom fonts (Gill Sans and Granjon) for brand consistency
+- **Typography**: Modern fonts (Inter and Playfair Display) for brand consistency
 - **Color Scheme**: Clean, modern design with focus on readability
+- **Design System**: CSS custom properties for consistent styling
+
+## 📊 Analytics
+
+The website includes comprehensive Google Analytics tracking:
+
+- **Page Views**: Automatic tracking of all routes
+- **User Engagement**: Scroll depth and time on page
+- **Interactions**: Button clicks, form submissions, video plays
+- **Booking Funnel**: Track booking-related actions
+- **Contact Methods**: Phone and email click tracking
+- **Social Media**: Facebook and Instagram link tracking
+
+### Analytics Configuration
+
+Analytics is configured in `src/config/analytics.js`:
+- Universal Analytics ID: `UA-175035074-1`
+- Ready for GA4 migration
+- Custom event tracking
+- Enhanced ecommerce tracking
 
 ## 🔧 Customization
 
@@ -124,7 +151,7 @@ npm run preview
 
 - Global styles are in `src/App.css`
 - Component-specific styles are in separate CSS files
-- Original CSS is imported from `public/css/style.css`
+- Uses CSS custom properties for consistent theming
 
 ### Images
 
@@ -137,6 +164,7 @@ npm run preview
 - **Optimized Assets**: Images are optimized for web
 - **Fast Build**: Vite provides fast development and build times
 - **SEO Friendly**: Proper meta tags and semantic HTML structure
+- **Analytics Optimized**: Minimal impact on site performance
 
 ## 🌐 Deployment
 
