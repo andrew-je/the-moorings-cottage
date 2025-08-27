@@ -1,0 +1,68 @@
+/* Review page specific styles */
+.review__wrapper {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.review__wrapper .top__ {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.review__wrapper .top__ h2 {
+  margin-bottom: 20px;
+}
+
+.review__wrapper .top__ p {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.review__item {
+  background-color: #f8f8f8;
+  padding: 30px;
+  border-radius: 8px;
+  border-left: 4px solid #333;
+}
+
+.review__content p {
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.review__author {
+  font-weight: 500;
+  color: #666;
+  font-size: 14px;
+}
+
+.review__logo {
+  text-align: center;
+}
+
+.review__logo img {
+  max-width: 200px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .reviews__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .review__item {
+    padding: 20px;
+  }
+}

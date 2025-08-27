@@ -1,0 +1,79 @@
+/* Booking page specific styles */
+.booking__wrapper {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.booking__wrapper .top__ {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.booking__wrapper .top__ h2 {
+  margin-bottom: 20px;
+}
+
+.booking__wrapper .top__ p {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.booking__calendar {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.calendar__info {
+  background-color: #f8f8f8;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.calendar__info h6 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.calendar__info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.calendar__info li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  padding-left: 20px;
+}
+
+.calendar__info li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #666;
+}
+
+.calendar__info li:last-child {
+  border-bottom: none;
+}
+
+.calendar__iframe {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .booking__wrapper {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  
+  .calendar__info {
+    padding: 20px;
+  }
+}
