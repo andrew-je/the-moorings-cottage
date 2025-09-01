@@ -6,7 +6,7 @@
   /* Color Palette */
   --color-primary: #1a1a1a;
   --color-secondary: #6b7280;
-  --color-accent: #f59e0b;
+  --color-accent: #0891b2;
   --color-background: #ffffff;
   --color-surface: #f8fafc;
   --color-border: #e2e8f0;
@@ -145,7 +145,6 @@ a:hover {
 .btn:hover {
   background-color: transparent;
   color: var(--color-primary);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
@@ -169,6 +168,17 @@ a:hover {
 .btn--accent:hover {
   background-color: transparent;
   color: var(--color-accent);
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+.btn--primary:hover {
+  background-color: transparent;
+  color: var(--color-primary);
 }
 
 /* Layout Components */

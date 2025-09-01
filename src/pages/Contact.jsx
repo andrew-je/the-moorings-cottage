@@ -19,7 +19,7 @@ const Contact = () => {
                   <p><a href="tel:+4407742042031">+44 (0)7742042031</a></p>
                   <p><a href="tel:+44 7796 601576">+44 (0)7796 601576</a></p>
                 </div>
-                <div className="contact__item">
+                <div className="contact__item contact__item--centered">
                   <h4>Email</h4>
                   <p><a href="mailto:themooringscottage@gmail.com">themooringscottage@gmail.com</a></p>
                 </div>

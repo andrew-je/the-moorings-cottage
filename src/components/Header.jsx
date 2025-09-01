@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +31,14 @@ const Header = () => {
     document.body.style.overflow = 'auto';
   };
 
+  const handleNavClick = (path) => {
+    hideMenu();
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/cottage', label: 'The Cottage' },
@@ -37,6 +46,7 @@ const Header = () => {
     { path: '/booking', label: 'Booking' },
     { path: '/review', label: 'Reviews' },
     { path: '/area', label: 'Local Area' },
+    { path: '/blog', label: 'Blog' },
     { path: '/contact', label: 'Contact' }
   ];
 
@@ -98,8 +108,8 @@ const Header = () => {
               onClick={hideMenu}
               aria-label="Close menu"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6L6 18M6 6L18 18"/>
               </svg>
             </button>
           </div>
@@ -108,23 +118,25 @@ const Header = () => {
             <ul className="mobile-menu__nav-list">
               {navItems.map((item, index) => (
                 <li key={item.path} className="mobile-menu__nav-item">
-                  <Link 
-                    to={item.path} 
+                  <button 
                     className={`mobile-menu__nav-link ${location.pathname === item.path ? 'mobile-menu__nav-link--active' : ''}`}
-                    onClick={hideMenu}
+                    onClick={() => handleNavClick(item.path)}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     {item.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
           </nav>
 
           <div className="mobile-menu__footer">
-            <Link to="/booking" className="btn btn--accent mobile-menu__booking-btn">
+            <button 
+              className="btn btn--accent mobile-menu__booking-btn"
+              onClick={() => handleNavClick('/booking')}
+            >
               Book Your Stay
-            </Link>
+            </button>
           </div>
         </div>
       </div>

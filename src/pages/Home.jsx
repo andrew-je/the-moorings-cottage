@@ -316,7 +316,7 @@ const Home = () => {
                   <iframe 
                     src="https://secure.bookalet.co.uk/widget?id=da8ebdf5-2f4a-47cb-8c92-f84032b16f5b&amp;property=17263&amp;monthcount=1" 
                     width="100%" 
-                    height="400" 
+                    height="600" 
                     frameBorder="0" 
                     allowTransparency="true" 
                     title="Booking Calendar"
