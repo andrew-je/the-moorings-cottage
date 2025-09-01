@@ -10,6 +10,8 @@ import Review from './pages/Review';
 import Area from './pages/Area';
 import Terms from './pages/Terms';
 import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import './App.css';
 
 // Analytics wrapper component
@@ -34,6 +36,8 @@ function App() {
               <Route path="/area" element={<Area />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
             </Routes>
           </main>
           <Footer />

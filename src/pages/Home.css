@@ -153,7 +153,6 @@
   background: var(--color-primary);
   color: var(--color-background);
   border-color: var(--color-primary);
-  transform: scale(1.1);
 }
 
 .gallery-slider__counter {
