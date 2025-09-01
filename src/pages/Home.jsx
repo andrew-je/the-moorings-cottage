@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -10,6 +10,7 @@ import './Home.css';
 
 const Home = () => {
   const swiperRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(1);
   const { trackBooking, trackGallery, trackVideo, trackEvent } = useAnalytics();
 
   const sliderImages = [
@@ -158,7 +159,7 @@ const Home = () => {
                   <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <span className="gallery-slider__counter">1 of {sliderImages.length}</span>
+              <span className="gallery-slider__counter">{currentSlide} of {sliderImages.length}</span>
               <button 
                 className="gallery-slider__btn gallery-slider__btn--next"
                 onClick={() => {
@@ -173,7 +174,9 @@ const Home = () => {
             </div>
             
             <Swiper
-              ref={swiperRef}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
               modules={[Navigation, Pagination, Autoplay]}
               slidesPerView={1}
               centeredSlides={true}
@@ -189,12 +192,17 @@ const Home = () => {
               longSwipes={true}
               longSwipesRatio={0.5}
               longSwipesMs={300}
+              grabCursor={true}
+              simulateTouch={true}
+              touchStartPreventDefault={false}
+              touchMoveStopPropagation={false}
               onSlideChange={(swiper) => {
-                const counter = document.querySelector('.gallery-slider__counter');
-                if (counter) {
-                  counter.textContent = `${swiper.realIndex + 1} of ${sliderImages.length}`;
-                }
-                trackGallery('slide_change', swiper.realIndex + 1);
+                const newSlide = swiper.realIndex + 1;
+                setCurrentSlide(newSlide);
+                trackGallery('slide_change', newSlide);
+              }}
+              onTouchStart={() => {
+                trackGallery('touch_start', 'mobile_swipe');
               }}
               breakpoints={{
                 768: {
