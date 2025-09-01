@@ -227,11 +227,6 @@ a:hover {
   transition: all var(--transition-normal);
 }
 
-.card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
-}
-
 /* Images */
 .img-fluid {
   width: 100%;

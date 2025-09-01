@@ -368,11 +368,16 @@
   .header__logo img {
     height: 45px;
   }
+  
+  .header__content {
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 768px) {
   .header__content {
     gap: var(--space-md);
+    justify-content: space-between;
   }
   
   .header__logo img {
@@ -386,6 +391,10 @@
   
   .mobile-menu__logo img {
     height: 35px;
+  }
+  
+  .header__actions {
+    gap: var(--space-md);
   }
 }
 
@@ -405,5 +414,9 @@
   
   .mobile-menu__logo img {
     height: 30px;
+  }
+  
+  .header__content {
+    padding: 0 var(--space-xs);
   }
 }
