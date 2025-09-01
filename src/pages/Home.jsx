@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useAnalytics } from '../hooks/useAnalytics';
+import SEOHead from '../components/SEOHead';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -88,8 +89,74 @@ const Home = () => {
     trackEvent('navigation', 'engagement', 'view_reviews', 1);
   };
 
+  const homeStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "The Moorings Cottage",
+    "description": "Beautiful self-catering holiday cottage in Y Felinheli, North Wales with stunning Menai Straits views",
+    "url": "https://themooringscottage.co.uk",
+    "telephone": "+447742042031",
+    "email": "themooringscottage@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Felinheli Terrace",
+      "addressLocality": "Y Felinheli",
+      "addressRegion": "Gwynedd",
+      "postalCode": "LL56 4JN",
+      "addressCountry": "GB"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 53.2167,
+      "longitude": -4.2167
+    },
+    "image": [
+      "https://themooringscottage.co.uk/img/hero-banner_.jpg",
+      "https://themooringscottage.co.uk/img/slider1.jpg",
+      "https://themooringscottage.co.uk/img/slider2.jpg"
+    ],
+    "priceRange": "££",
+    "amenityFeature": [
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Sea View",
+        "value": true
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Kitchen",
+        "value": true
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "WiFi",
+        "value": true
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Parking",
+        "value": true
+      }
+    ],
+    "starRating": {
+      "@type": "Rating",
+      "ratingValue": "5"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "50"
+    }
+  };
+
   return (
     <div className="home">
+      <SEOHead 
+        title="The Moorings Cottage - Holiday Cottage in Y Felinheli, North Wales | Self Catering Anglesey"
+        description="Beautiful self-catering holiday cottage in Y Felinheli, North Wales. Stunning Menai Straits views, near Anglesey & Snowdonia. Perfect cottage for North Wales holidays. Book now!"
+        keywords="cottage in anglesey, cottage in y felinheli, places to stay in north wales, north wales holiday cottage, self catering cottage, holiday cottage wales, menai straits cottage, snowdonia cottage, anglesey accommodation, north wales accommodation, y felinheli accommodation, self catering north wales, holiday rental wales"
+        structuredData={homeStructuredData}
+      />
       {/* Hero Section */}
       <section className="hero">
         <div className="hero__background">

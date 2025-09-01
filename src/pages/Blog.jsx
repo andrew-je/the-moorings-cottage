@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAnalytics } from '../hooks/useAnalytics';
+import SEOHead from '../components/SEOHead';
 import './Blog.css';
 
 const Blog = () => {
@@ -23,6 +24,12 @@ const Blog = () => {
 
   return (
     <div className="blog">
+      <SEOHead 
+        title="Blog - Walking Routes & Local Area Guide | The Moorings Cottage Y Felinheli"
+        description="Discover the best walking routes around Y Felinheli and North Wales. Expert guides to Snowdonia, Anglesey coastal paths, and local attractions near The Moorings Cottage."
+        keywords="y felinheli walks, north wales walking routes, snowdonia walks, anglesey coastal path, menai straits walks, caernarfon walks, north wales hiking, walking holidays wales"
+        url="https://themooringscottage.co.uk/blog"
+      />
       <section className="blog-hero">
         <div className="container">
           <div className="blog-hero__content">

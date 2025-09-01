@@ -1,8 +1,15 @@
+import SEOHead from '../components/SEOHead';
 import './Area.css';
 
 const Area = () => {
   return (
     <div className="area__wrapper">
+      <SEOHead 
+        title="Local Area - Y Felinheli, Anglesey & Snowdonia | The Moorings Cottage"
+        description="Explore Y Felinheli and surrounding areas. Discover Anglesey attractions, Snowdonia National Park, Caernarfon Castle, and local amenities near The Moorings Cottage."
+        keywords="y felinheli attractions, anglesey things to do, snowdonia national park, caernarfon castle, menai bridge, north wales attractions, places to visit anglesey, gwynedd attractions"
+        url="https://themooringscottage.co.uk/area"
+      />
       <div className="container">
         <div className="outer__area">
           <div className="top__">
