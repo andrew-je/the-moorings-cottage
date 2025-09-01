@@ -109,7 +109,7 @@ const Home = () => {
               <Link to="/booking" className="btn btn--accent" onClick={handleBookingClick}>
                 Book Your Stay
               </Link>
-              <Link to="/cottage" className="btn btn--secondary" onClick={handleCottageClick}>
+              <Link to="/cottage" className="btn btn--primary" onClick={handleCottageClick}>
                 View Cottage
               </Link>
             </div>
@@ -182,6 +182,13 @@ const Home = () => {
               autoplay={{ delay: 5000, disableOnInteraction: false }}
               navigation={false}
               pagination={false}
+              allowTouchMove={true}
+              touchRatio={1}
+              touchAngle={45}
+              shortSwipes={true}
+              longSwipes={true}
+              longSwipesRatio={0.5}
+              longSwipesMs={300}
               onSlideChange={(swiper) => {
                 const counter = document.querySelector('.gallery-slider__counter');
                 if (counter) {
@@ -280,11 +287,11 @@ const Home = () => {
       {/* Bridge Image Section */}
       <section className="bridge-section">
         <div className="bridge-section__image">
-          <img src="/img/bridge.webp" alt="Menai Suspension Bridge" className="img-cover" />
-          <div className="bridge-section__overlay">
-            <h2>Menai Suspension Bridge</h2>
-            <p>Connecting mainland Wales to the Isle of Anglesey</p>
-          </div>
+                      <img src="/img/bridge.webp" alt="Menai Bridge" className="img-cover" />
+            <div className="bridge-section__overlay">
+              <h2>Menai Bridge</h2>
+              <p>Connecting mainland Wales to the Isle of Anglesey</p>
+            </div>
         </div>
       </section>
 
