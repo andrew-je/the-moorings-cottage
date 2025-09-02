@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { cn } from '../lib/utils';
 import './Header.css';
 
 const Header = () => {
@@ -10,29 +12,39 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
 
-  const showMenu = () => {
-    setIsMenuOpen(true);
-    document.body.style.overflow = 'hidden';
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    // Prevent background scrolling when menu is open
+    document.body.style.overflow = !isMenuOpen ? 'hidden' : '';
   };
 
-  const hideMenu = () => {
-    setIsMenuOpen(false);
-    document.body.style.overflow = 'auto';
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Close mobile menu if open
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+      document.body.style.overflow = '';
+    }
   };
 
   const handleNavClick = (path) => {
-    hideMenu();
+    setIsMenuOpen(false);
+    document.body.style.overflow = '';
     navigate(path);
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -52,91 +64,113 @@ const Header = () => {
 
   return (
     <>
-      <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
-        <div className="container">
-          <div className="header__content">
-            <div className="header__logo">
-              <Link to="/">
-                <img src="/img/logo.svg" alt="The Moorings Cottage" />
-              </Link>
-            </div>
+      
+      <header className="fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300">
+        <div className="flex justify-center px-4">
+          <div 
+            className={cn(
+              "navbar-container",
+              isScrolled 
+                ? "navbar-container--scrolled" 
+                : "navbar-container--top"
+            )}
+          >
+            <Link 
+              to="/" 
+              className="flex items-center"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToTop();
+              }}
+              aria-label="The Moorings Cottage"
+            >
+              <img 
+                src="/img/logo.svg" 
+                alt="The Moorings Cottage" 
+                className="h-5 sm:h-6 w-auto" 
+              />
+            </Link>
 
-            <nav className={`header__nav ${isMenuOpen ? 'header__nav--open' : ''}`}>
-              <ul className="header__nav-list">
-                {navItems.map((item) => (
-                  <li key={item.path} className="header__nav-item">
-                    <Link 
-                      to={item.path} 
-                      className={`header__nav-link ${location.pathname === item.path ? 'header__nav-link--active' : ''}`}
-                      onClick={hideMenu}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div className="header__actions">
-              <Link to="/booking" className="btn btn--accent header__booking-btn">
-                Book Now
-              </Link>
-              
-              <button 
-                className={`header__menu-btn ${isMenuOpen ? 'header__menu-btn--open' : ''}`}
-                onClick={isMenuOpen ? hideMenu : showMenu}
-                aria-label="Toggle menu"
-              >
+            {/* Menu button for all viewports */}
+            <button 
+              className="menu-button"
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              <div className="menu-icon">
                 <span></span>
                 <span></span>
                 <span></span>
-              </button>
-            </div>
+              </div>
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`mobile-menu ${isMenuOpen ? 'mobile-menu--open' : ''}`}>
-        <div className="mobile-menu__content">
-          <div className="mobile-menu__header">
-            <div className="mobile-menu__logo">
-              <img src="/img/logo.svg" alt="The Moorings Cottage" />
-            </div>
-            <button 
-              className="mobile-menu__close"
-              onClick={hideMenu}
-              aria-label="Close menu"
+      {/* Full-screen overlay menu for all viewports */}
+      <div className={cn(
+        "menu-overlay",
+        isMenuOpen ? "menu-overlay--open" : ""
+      )}>
+        <div className="menu-overlay__content">
+          {/* Close button in top right */}
+          <button 
+            className="menu-close"
+            onClick={toggleMenu}
+            aria-label="Close menu"
+          >
+            <X size={32} />
+          </button>
+
+
+          {/* Navigation links */}
+          <nav className="menu-nav">
+            <Link 
+              to="/" 
+              className={cn(
+                "menu-link",
+                location.pathname === '/' && "menu-link--active"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToTop();
+                setIsMenuOpen(false);
+                document.body.style.overflow = '';
+              }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 6L6 18M6 6L18 18"/>
-              </svg>
-            </button>
-          </div>
-          
-          <nav className="mobile-menu__nav">
-            <ul className="mobile-menu__nav-list">
-              {navItems.map((item, index) => (
-                <li key={item.path} className="mobile-menu__nav-item">
-                  <button 
-                    className={`mobile-menu__nav-link ${location.pathname === item.path ? 'mobile-menu__nav-link--active' : ''}`}
-                    onClick={() => handleNavClick(item.path)}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
+              Home
+            </Link>
+            {navItems.slice(1).map((item, index) => (
+              <Link 
+                key={item.path}
+                to={item.path} 
+                className={cn(
+                  "menu-link",
+                  location.pathname === item.path && "menu-link--active"
+                )}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  document.body.style.overflow = '';
+                }}
+                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
-          <div className="mobile-menu__footer">
-            <button 
-              className="btn btn--accent mobile-menu__booking-btn"
-              onClick={() => handleNavClick('/booking')}
+          {/* Book Now button in overlay */}
+          <div className="menu-footer">
+            <Link 
+              to="/booking"
+              className="menu-booking-btn"
+              onClick={() => {
+                setIsMenuOpen(false);
+                document.body.style.overflow = '';
+              }}
             >
               Book Your Stay
-            </button>
+            </Link>
           </div>
         </div>
       </div>
