@@ -80,7 +80,7 @@ const Header = () => {
               className="flex items-center"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToTop();
+                handleNavClick('/');
               }}
               aria-label="The Moorings Cottage"
             >
@@ -133,9 +133,7 @@ const Header = () => {
               )}
               onClick={(e) => {
                 e.preventDefault();
-                scrollToTop();
-                setIsMenuOpen(false);
-                document.body.style.overflow = '';
+                handleNavClick('/');
               }}
             >
               Home

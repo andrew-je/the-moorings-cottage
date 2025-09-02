@@ -1,6 +1,6 @@
 /* Booking page specific styles */
 .booking__wrapper {
-  padding-top: 0;
+  padding-top: 120px;
   padding-bottom: 80px;
 }
 
@@ -69,7 +69,7 @@
 
 @media (max-width: 768px) {
   .booking__wrapper {
-    padding-top: 0;
+    padding-top: 100px;
     padding-bottom: 60px;
   }
   
