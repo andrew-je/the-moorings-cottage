@@ -408,19 +408,38 @@
   .hero {
     height: 70vh;
     min-height: 400px;
+    padding-top: calc(var(--header-height) + 2rem);
   }
   
   .hero__content {
     text-align: center;
+    margin-top: 2rem;
+  }
+  
+  /* Mobile click state for View Cottage button */
+  .hero__actions .btn--primary:active {
+    background-color: transparent;
+    color: var(--color-background);
+    border-color: var(--color-background);
   }
   
   .gallery-slider__controls {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: var(--space-sm);
+    padding: 0 var(--space-sm);
   }
   
   .gallery-slider__counter {
-    order: -1;
+    order: 0;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .gallery-slider__btn {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
   }
   
   .bridge-section {

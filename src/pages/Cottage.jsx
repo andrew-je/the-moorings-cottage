@@ -66,8 +66,12 @@ const Cottage = () => {
               </div>
             </div>
           </div>
-          <div className="button__wrapper">
-            <Link to="/booking">BOOK NOW</Link>
+          <div className="cottage-cta card">
+            <h3>Planning Your Stay?</h3>
+            <p>Ready to experience Y Felinheli and all it has to offer? Book your stay at The Moorings Cottage today.</p>
+            <Link to="/booking" className="btn btn--accent">
+              Check Availability
+            </Link>
           </div>
         </div>
       </div>

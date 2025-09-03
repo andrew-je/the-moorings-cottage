@@ -94,9 +94,16 @@
   
   .blog-hero {
     padding: var(--space-2xl) 0;
+    padding-top: calc(var(--header-height) + var(--space-2xl));
   }
   
   .blog-card__title {
     font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-hero {
+    padding-top: calc(var(--header-height) + var(--space-xl));
   }
 }

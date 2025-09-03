@@ -146,9 +146,9 @@ const Header = () => {
                   "menu-link",
                   location.pathname === item.path && "menu-link--active"
                 )}
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  document.body.style.overflow = '';
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.path);
                 }}
                 style={{ animationDelay: `${(index + 1) * 0.1}s` }}
               >
@@ -162,9 +162,9 @@ const Header = () => {
             <Link 
               to="/booking"
               className="menu-booking-btn"
-              onClick={() => {
-                setIsMenuOpen(false);
-                document.body.style.overflow = '';
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('/booking');
               }}
             >
               Book Your Stay

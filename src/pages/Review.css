@@ -31,7 +31,7 @@
   background-color: #f8f8f8;
   padding: 30px;
   border-radius: 8px;
-  border-left: 4px solid #333;
+  border-left: 4px solid var(--color-accent);
 }
 
 .review__content p {

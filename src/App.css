@@ -49,7 +49,7 @@
   
   /* Layout */
   --container-max-width: 1200px;
-  --container-padding: var(--space-lg);
+  --container-padding: 32px; /* Desktop default (≥993px) */
   --header-height: 80px;
 }
 
@@ -292,9 +292,18 @@ main {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/* Tablet (≥577px and ≤992px): gutter 24px */
+@media (max-width: 992px) and (min-width: 577px) {
   :root {
-    --container-padding: var(--space-md);
+    --container-padding: 24px;
+    --header-height: 75px;
+  }
+}
+
+/* Mobile (≤576px): gutter 16px */
+@media (max-width: 576px) {
+  :root {
+    --container-padding: 16px;
     --header-height: 70px;
   }
   
@@ -310,12 +319,6 @@ main {
   
   .card {
     padding: var(--space-lg);
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --container-padding: var(--space-sm);
   }
   
   .btn {
