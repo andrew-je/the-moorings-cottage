@@ -30,8 +30,9 @@
 }
 
 .footer__logo img {
-  height: 24px;
+  height: 32px;
   width: auto;
+  max-width: 100%;
 }
 
 .footer__tagline {
@@ -167,7 +168,7 @@
   }
   
   .footer__logo img {
-    height: 35px;
+    height: 40px;
   }
 }
 
@@ -197,7 +198,7 @@
   }
   
   .footer__logo img {
-    height: 30px;
+    height: 36px;
   }
 }
 
@@ -220,6 +221,6 @@
   }
   
   .footer__logo img {
-    height: 28px;
+    height: 32px;
   }
 }

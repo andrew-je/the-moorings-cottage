@@ -55,6 +55,12 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+@media (min-width: 993px) {
+  .hero__title {
+    white-space: nowrap;
+  }
+}
+
 .hero__subtitle {
   display: block;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
@@ -422,7 +428,22 @@
     color: var(--color-background);
     border-color: var(--color-background);
   }
-  
+}
+
+/* Hero CTA button styling - white for visibility */
+.hero__actions .btn--primary {
+  background-color: var(--color-background);
+  border-color: var(--color-background);
+  color: var(--color-primary);
+}
+
+.hero__actions .btn--primary:hover {
+  background-color: transparent;
+  color: var(--color-background);
+  border-color: var(--color-background);
+}
+
+@media (max-width: 480px) {
   .gallery-slider__controls {
     flex-direction: row;
     justify-content: space-between;

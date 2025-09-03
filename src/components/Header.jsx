@@ -85,7 +85,7 @@ const Header = () => {
               aria-label="The Moorings Cottage"
             >
               <img 
-                src="/img/logo.svg" 
+                src="/img/logo_footer.svg" 
                 alt="The Moorings Cottage" 
                 className="h-5 sm:h-6 w-auto" 
               />

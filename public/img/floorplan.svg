@@ -2,7 +2,7 @@
 <svg width="736px" height="684px" viewBox="0 0 736 684" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #F7F7F7;">
     <title>Floorplan</title>
     <g id="Floorplan" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect fill="#F7F7F7" x="0" y="0" width="736" height="684"></rect>
+        <rect x="0" y="0" width="736" height="684"></rect>
         <g id="Group" transform="translate(0.000000, 83.000000)">
             <rect id="Rectangle" stroke="#979797" fill-rule="nonzero" x="0.5" y="109.5" width="332" height="299"></rect>
             <rect id="Rectangle" stroke="#979797" fill-rule="nonzero" x="0.5" y="125.5" width="5" height="59"></rect>
