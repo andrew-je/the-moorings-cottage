@@ -50,8 +50,8 @@ const Cottage = () => {
           </div>
           <div className="gallery__cottage">
             <div className="top">
-              <div className="front">
-                <img src="/img/frontview.webp" alt="front" />
+              <div className="floorplan">
+                <img src="/img/floorplan.svg" alt="floorplan" />
               </div>
               <div className="breakfast">
                 <img src="/img/breakfast.webp" alt="breakfast" />
@@ -61,8 +61,8 @@ const Cottage = () => {
               <div className="lamp">
                 <img src="/img/lamp.webp" alt="lamp" />
               </div>
-              <div className="floorplan">
-                <img src="/img/floorplan.svg" alt="floorplan" />
+              <div className="front">
+                <img src="/img/frontview.webp" alt="front" />
               </div>
             </div>
           </div>

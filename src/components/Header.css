@@ -35,9 +35,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 2.5rem;
-  border-radius: 50px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   max-width: 1000px;
   width: 90%;
   margin: 0 auto;
@@ -48,13 +46,19 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  border: none;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0.75rem 2rem;
 }
 
 .navbar-container--scrolled {
   background: rgba(255, 255, 255, 0.75);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   -moz-backdrop-filter: blur(20px);
@@ -84,23 +88,14 @@
   transform: scale(1.05);
 }
 
-.menu-icon {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.menu-icon span {
-  width: 18px;
-  height: 2px;
-  background: var(--color-primary, #1a1a1a);
-  border-radius: 1px;
+.menu-icon-svg {
+  color: var(--color-primary, #1a1a1a);
   transition: all 0.3s ease;
-  transform-origin: center;
 }
 
-.menu-button:hover .menu-icon span {
-  background: var(--color-accent, #0891b2);
+.menu-button:hover .menu-icon-svg {
+  color: var(--color-accent, #0891b2);
+  transform: scale(1.1);
 }
 
 /* Menu Overlay */

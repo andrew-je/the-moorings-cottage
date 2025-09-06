@@ -65,8 +65,8 @@ const Header = () => {
   return (
     <>
       
-      <header className="fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300">
-        <div className="flex justify-center px-4">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div className="flex justify-center">
           <div 
             className={cn(
               "navbar-container",
@@ -97,11 +97,18 @@ const Header = () => {
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              <div className="menu-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+              <svg 
+                className="menu-icon-svg" 
+                width="20" 
+                height="16" 
+                viewBox="0 0 20 16" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="20" height="2" rx="1" fill="currentColor"/>
+                <rect y="7" width="20" height="2" rx="1" fill="currentColor"/>
+                <rect y="14" width="20" height="2" rx="1" fill="currentColor"/>
+              </svg>
             </button>
           </div>
         </div>
