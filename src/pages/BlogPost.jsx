@@ -22,14 +22,13 @@ const BlogPost = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
   };
-
-  // This would typically come from a CMS or API
+  
   const blogPost = {
     title: "5 Spectacular Walking Routes Around Y Felinheli: Your Complete Guide",
     date: "September 1, 2025",
     readTime: "6 min read",
     author: "The Moorings Cottage Team",
-    image: "/img/menai-straits-view.jpg",
+    image: '/snowdon.jpg',
     content: `
       <p>Y Felinheli, nestled on the shores of the Menai Straits, offers some of North Wales' most spectacular walking routes. From gentle coastal strolls to challenging mountain paths, these five carefully selected walks showcase the very best of this beautiful Welsh village and its surroundings. Each route is easily accessible from The Moorings Cottage, making it your perfect base for exploring on foot.</p>
 

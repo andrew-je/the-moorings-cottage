@@ -29,16 +29,42 @@
   .sm\:h-6 { height: 1.5rem; }
 }
 
-/* Centered Navbar Container */
+/* Header base styles */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1002; /* Increased to be above menu overlay */
+  transition: all 0.3s ease;
+  padding: 0;
+  pointer-events: none; /* Allow clicks to pass through to elements below */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+header.menu-open {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* Navbar Container */
 .navbar-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  max-width: 1000px;
-  width: 90%;
-  margin: 0 auto;
+  border-radius: 0;
+  border: none;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  pointer-events: auto; /* Enable clicks on the navbar */
+  position: relative; /* Ensure z-index works correctly */
+  z-index: 2; /* Above the background but below the menu button */
 }
 
 .navbar-container--top {
@@ -46,12 +72,8 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border-radius: 0;
   border: none;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0.75rem 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .navbar-container--scrolled {
@@ -63,6 +85,10 @@
   -webkit-backdrop-filter: blur(20px);
   -moz-backdrop-filter: blur(20px);
   -ms-backdrop-filter: blur(20px);
+  max-width: 1400px;
+  width: 90%;
+  margin: 20px auto 0;
+  padding: 0.75rem 2.5rem;
 }
 
 /* Menu Button */
@@ -80,6 +106,8 @@
   justify-content: center;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  z-index: 1003; /* Above the header and menu overlay */
+  pointer-events: auto; /* Ensure button is clickable */
 }
 
 .menu-button:hover {
@@ -88,14 +116,23 @@
   transform: scale(1.05);
 }
 
-.menu-icon-svg {
-  color: var(--color-primary, #1a1a1a);
-  transition: all 0.3s ease;
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.menu-button:hover .menu-icon-svg {
-  color: var(--color-accent, #0891b2);
-  transform: scale(1.1);
+.menu-icon span {
+  width: 18px;
+  height: 2px;
+  background: var(--color-primary, #1a1a1a);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.menu-button:hover .menu-icon span {
+  background: var(--color-accent, #0891b2);
 }
 
 /* Menu Overlay */
@@ -108,10 +145,17 @@
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 100;
+  z-index: 1001; /* Below header but above page content */
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.menu-overlay--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .menu-overlay--open {
@@ -155,6 +199,7 @@
   color: var(--color-primary, #1a1a1a);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  z-index: 1003; /* Same as menu button to ensure it's clickable */
 }
 
 .menu-close:hover {
@@ -252,9 +297,37 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  header, header.scrolled {
+    padding: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  
   .navbar-container {
-    max-width: calc(100vw - 2rem);
-    padding: 0.625rem 1.25rem;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    padding: 1rem 1.5rem;
+    margin: 0;
+  }
+  
+  .navbar-container--top {
+    background: rgba(255, 255, 255, 1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .navbar-container--scrolled {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    margin: 20px auto 0;
+    max-width: calc(100% - 2rem);
+    width: auto;
   }
   
   .menu-button {
@@ -291,7 +364,6 @@
 
 @media (max-width: 480px) {
   .navbar-container {
-    max-width: calc(100vw - 1.5rem);
     padding: 0.5rem 1rem;
   }
   

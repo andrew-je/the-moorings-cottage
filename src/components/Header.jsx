@@ -12,12 +12,18 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      const scrolled = window.scrollY > 10;
+      if (scrolled !== isScrolled) {
+        setIsScrolled(scrolled);
+      }
     };
+    
+    // Set initial state
+    handleScroll();
     
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -64,53 +70,41 @@ const Header = () => {
 
   return (
     <>
-      
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div className="flex justify-center">
-          <div 
-            className={cn(
-              "navbar-container",
-              isScrolled 
-                ? "navbar-container--scrolled" 
-                : "navbar-container--top"
-            )}
+      <header className={`${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
+        <div className={cn(
+          "navbar-container",
+          isScrolled 
+            ? "navbar-container--scrolled" 
+            : "navbar-container--top"
+        )}>
+          <Link 
+            to="/" 
+            className="flex items-center"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('/');
+            }}
+            aria-label="The Moorings Cottage"
           >
-            <Link 
-              to="/" 
-              className="flex items-center"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('/');
-              }}
-              aria-label="The Moorings Cottage"
-            >
-              <img 
-                src="/img/logo_footer.svg" 
-                alt="The Moorings Cottage" 
-                className="h-5 sm:h-6 w-auto" 
-              />
-            </Link>
+            <img 
+              src="/img/logo_footer.svg" 
+              alt="The Moorings Cottage" 
+              className="h-5 sm:h-6 w-auto" 
+            />
+          </Link>
 
-            {/* Menu button for all viewports */}
-            <button 
-              className="menu-button"
-              onClick={toggleMenu}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            >
-              <svg 
-                className="menu-icon-svg" 
-                width="20" 
-                height="16" 
-                viewBox="0 0 20 16" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="20" height="2" rx="1" fill="currentColor"/>
-                <rect y="7" width="20" height="2" rx="1" fill="currentColor"/>
-                <rect y="14" width="20" height="2" rx="1" fill="currentColor"/>
-              </svg>
-            </button>
-          </div>
+          {/* Menu button for all viewports */}
+          <button 
+            className="menu-button"
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            <div className="menu-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
         </div>
       </header>
 
@@ -128,7 +122,6 @@ const Header = () => {
           >
             <X size={32} />
           </button>
-
 
           {/* Navigation links */}
           <nav className="menu-nav">

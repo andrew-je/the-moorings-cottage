@@ -60,7 +60,10 @@
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   font-size: 16px;
 }

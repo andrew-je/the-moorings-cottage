@@ -17,7 +17,7 @@ const Blog = () => {
       excerpt: "Discover five carefully selected walking routes around Y Felinheli, from gentle coastal strolls to challenging mountain paths. Each walk is easily accessible from The Moorings Cottage.",
       date: "September 1, 2025",
       readTime: "6 min read",
-      image: "/img/menai-straits-view.jpg",
+      image: "/snowdon.jpg",
       slug: "walking-routes-attractions-y-felinheli"
     }
   ];
