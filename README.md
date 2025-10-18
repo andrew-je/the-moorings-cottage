@@ -175,12 +175,6 @@ The site can be deployed to any static hosting service:
 - **GitHub Pages**: Deploy from the `dist/` folder
 - **Traditional Hosting**: Upload the `dist/` folder contents
 
-## 📞 Support
-
-For questions or support, contact:
-- Phone: +44 (0)7742042031 or +44 (0)7796 601576
-- Email: themooringscottage@gmail.com
-
 ## 📄 License
 
 This project is for The Moorings Cottage. All rights reserved.
