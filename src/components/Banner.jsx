@@ -20,6 +20,7 @@ const Banner = () => {
   const posthog = usePostHog();
   const [showBanner, setShowBanner] = useState(false);
   const [pageViewCount, setPageViewCount] = useState(0);
+  const [isInTestGroup, setIsInTestGroup] = useState(false);
   const location = useLocation();
 
   // Function to check and update banner visibility
@@ -29,18 +30,31 @@ const Banner = () => {
     try {
       console.log('Checking banner visibility. Page views:', views);
       
-      if (views >= 3) {
-        console.log('Showing banner - 2+ page views detected');
+      // Check if banner is enabled via feature flag
+      const isBannerEnabled = posthog.isFeatureEnabled('show_booking_banner');
+      
+      // Check if user is in the test group (50% of users)
+      const isInTestGroup = posthog.isFeatureEnabled('booking_banner_ab_test');
+      setIsInTestGroup(isInTestGroup);
+      
+      if (views >= 3 && isBannerEnabled && isInTestGroup) {
+        console.log('Showing banner - Test group with 3+ page views');
         setShowBanner(true);
         
         // Capture the banner shown event
         posthog.capture('banner_shown', {
           banner_type: 'check_availability',
           page_view_count: views,
-          path: window.location.pathname
+          path: window.location.pathname,
+          test_group: 'variant_50pct',
+          feature_flag: 'booking_banner_ab_test'
         });
       } else {
-        console.log('Not showing banner - only', views, 'page views');
+        console.log('Not showing banner - ', {
+          views,
+          isBannerEnabled,
+          isInTestGroup
+        });
         setShowBanner(false);
       }
     } catch (error) {
@@ -48,25 +62,36 @@ const Banner = () => {
     }
   }, [posthog]);
 
-  // Track page views
+  // Track page views and check feature flags
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !posthog) return;
     
     // Get current view count and increment
     const newViewCount = incrementSessionPageViews();
     setPageViewCount(newViewCount);
     
-    // Check if we should show the banner
-    checkBannerVisibility(newViewCount);
+    // Load feature flags
+    const loadFeatureFlags = async () => {
+      try {
+        // Ensure flags are loaded
+        await posthog.reloadFeatureFlags();
+        // Check banner visibility with the latest flags
+        checkBannerVisibility(newViewCount);
+      } catch (error) {
+        console.error('Error loading feature flags:', error);
+      }
+    };
     
-    // Set up an interval to check for updates (in case of SPA navigation)
+    loadFeatureFlags();
+    
+    // Set up an interval to check for updates
     const interval = setInterval(() => {
       const currentViews = getSessionPageViews();
       checkBannerVisibility(currentViews);
     }, 3000);
     
     return () => clearInterval(interval);
-  }, [checkBannerVisibility, location.pathname]);
+  }, [posthog, checkBannerVisibility, location.pathname]);
 
   const handleClose = () => {
     setShowBanner(false);
