@@ -15,6 +15,8 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import './App.css';
+import { PostHogProvider } from './providers/PostHogProvider';
+import Banner from './components/Banner';
 
 // Analytics wrapper component
 const AnalyticsWrapper = ({ children }) => {
@@ -37,27 +39,30 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <AnalyticsWrapper>
-          <ScrollToTop />
-          <div className="App">
-            <Header />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/cottage" element={<Cottage />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/booking" element={<Booking />} />
-                <Route path="/review" element={<Review />} />
-                <Route path="/area" element={<Area />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        </AnalyticsWrapper>
+        <PostHogProvider>
+          <AnalyticsWrapper>
+            <ScrollToTop />
+            <div className="App">
+              <Header />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/cottage" element={<Cottage />} />
+                  <Route path="/gallery" element={<Gallery />} />
+                  <Route path="/booking" element={<Booking />} />
+                  <Route path="/review" element={<Review />} />
+                  <Route path="/area" element={<Area />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+                </Routes>
+              </main>
+              <Banner />
+              <Footer />
+            </div>
+          </AnalyticsWrapper>
+        </PostHogProvider>
       </Router>
     </HelmetProvider>
   );
