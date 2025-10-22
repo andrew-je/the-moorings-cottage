@@ -5,15 +5,21 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Get PostHog configuration from environment variables
-const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
-const POSTHOG_HOST = import.meta.env.VITE_POSTHOG_HOST || 'https://app.posthog.com';
+const POSTHOG_KEY = import.meta.env.VITE_PUBLIC_POSTHOG_KEY;
+const POSTHOG_HOST = import.meta.env.VITE_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com';
+
+// Log environment for debugging
+console.log('PostHog Configuration:', {
+  key: POSTHOG_KEY ? '*** Key is set ***' : 'MISSING KEY',
+  host: POSTHOG_HOST
+});
 
 // Validate required environment variables
 if (!POSTHOG_KEY) {
-  console.error('Missing required environment variable: VITE_POSTHOG_KEY');
+  console.error('Missing required environment variable: VITE_PUBLIC_POSTHOG_KEY');
 }
 if (!POSTHOG_HOST) {
-  console.warn('VITE_POSTHOG_HOST not set, using default:', POSTHOG_HOST);
+  console.warn('VITE_PUBLIC_POSTHOG_HOST not set, using default:', POSTHOG_HOST);
 }
 
 export function PostHogProvider({ children }) {
@@ -53,42 +59,61 @@ export function PostHogProvider({ children }) {
 
   // Track page views and update counter
   useEffect(() => {
-    try {
-      if (typeof window === 'undefined' || !window.posthog) return;
-      
-      // Use a small delay to ensure PostHog is fully initialized
-      const timer = setTimeout(() => {
-        try {
-          const currentCount = posthog.get_property('$pageview_count') || 0;
-          const newCount = currentCount + 1;
-          
-          console.log(`Page view ${newCount} - ${location.pathname}`);
-          
-          // Update the page view count
-          posthog.register({
+    if (typeof window === 'undefined' || !window.posthog) return;
+    
+    const trackPageView = () => {
+      try {
+        // Get the current count or default to 0
+        const currentCount = posthog.get_property('$pageview_count') || 0;
+        const newCount = currentCount + 1;
+        
+        console.log(`Page view ${newCount} - ${location.pathname}`);
+        
+        // Update the page view count
+        posthog.register({
+          $pageview_count: newCount
+        });
+        
+        // Force an immediate sync to ensure the property is set
+        posthog.capture('$pageview', {
+          $current_url: window.location.href,
+          $pathname: location.pathname,
+          $set: {
             $pageview_count: newCount
-          }, { 
-            $set_once: { 
-              first_visit: new Date().toISOString() 
-            } 
-          });
-          
-          // Capture the pageview event
-          posthog.capture('$pageview', {
-            $current_url: window.location.href,
-            $pathname: location.pathname
-          });
-          
-          console.log('Current page view count:', newCount);
-        } catch (error) {
-          console.error('Error tracking page view:', error);
-        }
-      }, 100);
-      
-      return () => clearTimeout(timer);
-    } catch (error) {
-      console.error('Error in page view effect:', error);
-    }
+          }
+        });
+        
+        console.log('Current page view count:', newCount);
+        
+        // Return the new count for debugging
+        return newCount;
+      } catch (error) {
+        console.error('Error tracking page view:', error);
+        return 0;
+      }
+    };
+    
+    // Track the page view
+    const newCount = trackPageView();
+    
+    // For debugging - log the current state
+    console.log('Page view tracked. New count:', newCount);
+    
+    // Set up an interval to ensure the count is updated
+    // This is a workaround for any race conditions
+    const interval = setInterval(() => {
+      const currentCount = posthog.get_property('$pageview_count') || 0;
+      if (currentCount < newCount) {
+        console.log('Fixing page view count from', currentCount, 'to', newCount);
+        posthog.register({
+          $pageview_count: newCount
+        });
+      }
+    }, 1000);
+    
+    return () => {
+      clearInterval(interval);
+    };
   }, [location.pathname])
 
   return <PHProvider client={posthog}>{children}</PHProvider>

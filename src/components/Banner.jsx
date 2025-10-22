@@ -1,56 +1,90 @@
-import { useEffect, useState } from 'react';
-import posthog from 'posthog-js';
+import { useEffect, useState, useCallback } from 'react';
+import { usePostHog } from 'posthog-js/react';
+import { useLocation } from 'react-router-dom';
+
+// Track page views in session storage to persist across page reloads
+const getSessionPageViews = () => {
+  if (typeof window === 'undefined') return 0;
+  return parseInt(sessionStorage.getItem('page_view_count') || '0', 10);
+};
+
+const incrementSessionPageViews = () => {
+  if (typeof window === 'undefined') return 0;
+  const currentCount = getSessionPageViews();
+  const newCount = currentCount + 1;
+  sessionStorage.setItem('page_view_count', newCount.toString());
+  return newCount;
+};
 
 const Banner = () => {
+  const posthog = usePostHog();
   const [showBanner, setShowBanner] = useState(false);
   const [pageViewCount, setPageViewCount] = useState(0);
+  const location = useLocation();
 
-  // Check banner visibility whenever the component updates or pageViewCount changes
-  useEffect(() => {
-    const checkBanner = () => {
-      try {
-        if (typeof window === 'undefined' || !window.posthog) return;
+  // Function to check and update banner visibility
+  const checkBannerVisibility = useCallback((views) => {
+    if (!posthog) return;
+
+    try {
+      console.log('Checking banner visibility. Page views:', views);
+      
+      if (views >= 2) {
+        console.log('Showing banner - 2+ page views detected');
+        setShowBanner(true);
         
-        // Get the current page view count
-        const currentCount = posthog.get_property('$pageview_count') || 0;
-        setPageViewCount(currentCount);
-        
-        // Show banner if we have 2+ page views
-        if (currentCount >= 2) {
-          console.log('Showing banner - 2+ page views detected:', currentCount);
-          setShowBanner(true);
-          posthog.capture('banner_shown', { 
-            banner_type: 'check_availability',
-            page_view_count: currentCount
-          });
-        } else {
-          console.log('Not showing banner - only', currentCount, 'page views');
-          setShowBanner(false);
-        }
-      } catch (error) {
-        console.error('Error checking banner visibility:', error);
+        // Capture the banner shown event
+        posthog.capture('banner_shown', {
+          banner_type: 'check_availability',
+          page_view_count: views,
+          path: window.location.pathname
+        });
+      } else {
+        console.log('Not showing banner - only', views, 'page views');
+        setShowBanner(false);
       }
-    };
+    } catch (error) {
+      console.error('Error in checkBannerVisibility:', error);
+    }
+  }, [posthog]);
+
+  // Track page views
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
     
-    // Initial check
-    checkBanner();
+    // Get current view count and increment
+    const newViewCount = incrementSessionPageViews();
+    setPageViewCount(newViewCount);
     
-    // Set up an interval to check for updates (in case the property changes)
-    const interval = setInterval(checkBanner, 1000);
+    // Check if we should show the banner
+    checkBannerVisibility(newViewCount);
     
-    // Clean up
+    // Set up an interval to check for updates (in case of SPA navigation)
+    const interval = setInterval(() => {
+      const currentViews = getSessionPageViews();
+      checkBannerVisibility(currentViews);
+    }, 3000);
+    
     return () => clearInterval(interval);
-  }, [pageViewCount])
+  }, [checkBannerVisibility, location.pathname]);
 
   const handleClose = () => {
-    setShowBanner(false)
-    posthog.capture('banner_closed', { banner_type: 'check_availability' })
-  }
+    setShowBanner(false);
+    try {
+      posthog.capture('banner_closed', { banner_type: 'check_availability' });
+    } catch (error) {
+      console.error('Failed to capture banner_closed event:', error);
+    }
+  };
 
   const handleClick = () => {
-    posthog.capture('banner_clicked', { banner_type: 'check_availability' })
-    window.location.href = '/booking'
-  }
+    try {
+      posthog.capture('banner_clicked', { banner_type: 'check_availability' });
+    } catch (error) {
+      console.error('Failed to capture banner_clicked event:', error);
+    }
+    window.location.href = '/booking';
+  };
 
   if (!showBanner) return null
 
