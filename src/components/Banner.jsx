@@ -29,7 +29,7 @@ const Banner = () => {
     try {
       console.log('Checking banner visibility. Page views:', views);
       
-      if (views >= 2) {
+      if (views >= 3) {
         console.log('Showing banner - 2+ page views detected');
         setShowBanner(true);
         
