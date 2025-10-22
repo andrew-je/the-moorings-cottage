@@ -1,11 +1,20 @@
 // src/providers/PostHogProvider.jsx
-import { PostHogProvider as PHProvider } from 'posthog-js/react'
-import posthog from 'posthog-js'
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { PostHogProvider as PHProvider } from 'posthog-js/react';
+import posthog from 'posthog-js';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const POSTHOG_KEY = 'phc_zNhLN1QZVeiFOdYfQuqgFMm4ixmAgku6OPPf9QavYJS'
-const POSTHOG_HOST = 'https://app.posthog.com' // or your self-hosted URL
+// Get PostHog configuration from environment variables
+const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
+const POSTHOG_HOST = import.meta.env.VITE_POSTHOG_HOST || 'https://app.posthog.com';
+
+// Validate required environment variables
+if (!POSTHOG_KEY) {
+  console.error('Missing required environment variable: VITE_POSTHOG_KEY');
+}
+if (!POSTHOG_HOST) {
+  console.warn('VITE_POSTHOG_HOST not set, using default:', POSTHOG_HOST);
+}
 
 export function PostHogProvider({ children }) {
   const location = useLocation()
