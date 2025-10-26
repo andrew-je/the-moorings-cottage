@@ -23,25 +23,59 @@ const Banner = () => {
   const [isInTestGroup, setIsInTestGroup] = useState(false);
   const location = useLocation();
 
+  // Function to safely get feature flag with retry
+  const getFeatureFlag = useCallback(async (flagName, retries = 3, delay = 500) => {
+    if (!posthog) {
+      console.error('PostHog not initialized');
+      return null;
+    }
+
+    try {
+      // Force reload flags if needed
+      if (retries < 3) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+      
+      const value = await posthog.isFeatureEnabled(flagName);
+      if (value !== undefined) return value;
+      
+      if (retries > 0) {
+        console.log(`[Banner] Retrying to get flag ${flagName}, attempts left: ${retries}`);
+        return getFeatureFlag(flagName, retries - 1, delay * 1.5);
+      }
+      
+      return null;
+    } catch (error) {
+      console.error(`[Banner] Error getting flag ${flagName}:`, error);
+      return null;
+    }
+  }, [posthog]);
+
   // Function to check and update banner visibility
   const checkBannerVisibility = useCallback(async (views) => {
     if (!posthog) {
-      console.log('PostHog not initialized yet');
+      console.log('[Banner] PostHog not initialized yet');
       return;
     }
 
     try {
       console.log('[Banner] Checking visibility. Page views:', views);
       
-      // Check if banner is enabled via feature flag
-      const isBannerEnabled = await posthog.isFeatureEnabled('show_booking_banner');
-      console.log('[Banner] show_booking_banner flag:', isBannerEnabled);
+      // Get both flags in parallel
+      const [isBannerEnabled, isInTestGroup] = await Promise.all([
+        getFeatureFlag('show_booking_banner'),
+        getFeatureFlag('booking_banner_ab_test')
+      ]);
       
-      // Check if user is in the test group (50% of users)
-      const isInTestGroup = await posthog.isFeatureEnabled('booking_banner_ab_test');
-      console.log('[Banner] booking_banner_ab_test flag:', isInTestGroup);
+      console.log('[Banner] Flags:', { isBannerEnabled, isInTestGroup });
       
-      setIsInTestGroup(isInTestGroup);
+      // If we couldn't get the flags, don't show the banner
+      if (isBannerEnabled === null || isInTestGroup === null) {
+        console.log('[Banner] Could not determine feature flags, not showing banner');
+        return;
+      }
+      
+      setIsInTestGroup(!!isInTestGroup);
       
       if (views >= 3 && isBannerEnabled && isInTestGroup) {
         console.log('[Banner] Showing banner - Test group with 3+ page views');
@@ -68,36 +102,40 @@ const Banner = () => {
     }
   }, [posthog]);
 
-  // Track page views and check feature flags
+  // Update page view count and check banner visibility on route change
   useEffect(() => {
-    if (typeof window === 'undefined' || !posthog) return;
+    const newCount = incrementSessionPageViews();
+    setPageViewCount(newCount);
     
-    // Get current view count and increment
-    const newViewCount = incrementSessionPageViews();
-    setPageViewCount(newViewCount);
+    // Small delay to ensure PostHog is fully initialized
+    const timer = setTimeout(() => {
+      console.log('[Banner] Checking banner after route change to:', location.pathname);
+      checkBannerVisibility(newCount);
+    }, 300);
     
-    // Load feature flags
-    const loadFeatureFlags = async () => {
-      try {
-        // Ensure flags are loaded
-        await posthog.reloadFeatureFlags();
-        // Check banner visibility with the latest flags
-        checkBannerVisibility(newViewCount);
-      } catch (error) {
-        console.error('Error loading feature flags:', error);
-      }
-    };
+    return () => clearTimeout(timer);
+  }, [location.pathname, checkBannerVisibility]);
+
+  // Initial check when component mounts
+  useEffect(() => {
+    // Initial check after a short delay
+    const initialTimer = setTimeout(() => {
+      console.log('[Banner] Initial banner check');
+      checkBannerVisibility(pageViewCount);
+    }, 500);
     
-    loadFeatureFlags();
-    
-    // Set up an interval to check for updates
+    // Set up an interval to check for updates (as a fallback)
     const interval = setInterval(() => {
+      console.log('[Banner] Periodic banner check');
       const currentViews = getSessionPageViews();
       checkBannerVisibility(currentViews);
-    }, 3000);
+    }, 5000); // Check every 5 seconds as a fallback
     
-    return () => clearInterval(interval);
-  }, [posthog, checkBannerVisibility, location.pathname]);
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(interval);
+    };
+  }, [checkBannerVisibility, pageViewCount]);
 
   const handleClose = () => {
     setShowBanner(false);
