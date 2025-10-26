@@ -24,21 +24,27 @@ const Banner = () => {
   const location = useLocation();
 
   // Function to check and update banner visibility
-  const checkBannerVisibility = useCallback((views) => {
-    if (!posthog) return;
+  const checkBannerVisibility = useCallback(async (views) => {
+    if (!posthog) {
+      console.log('PostHog not initialized yet');
+      return;
+    }
 
     try {
-      console.log('Checking banner visibility. Page views:', views);
+      console.log('[Banner] Checking visibility. Page views:', views);
       
       // Check if banner is enabled via feature flag
-      const isBannerEnabled = posthog.isFeatureEnabled('show_booking_banner');
+      const isBannerEnabled = await posthog.isFeatureEnabled('show_booking_banner');
+      console.log('[Banner] show_booking_banner flag:', isBannerEnabled);
       
       // Check if user is in the test group (50% of users)
-      const isInTestGroup = posthog.isFeatureEnabled('booking_banner_ab_test');
+      const isInTestGroup = await posthog.isFeatureEnabled('booking_banner_ab_test');
+      console.log('[Banner] booking_banner_ab_test flag:', isInTestGroup);
+      
       setIsInTestGroup(isInTestGroup);
       
       if (views >= 3 && isBannerEnabled && isInTestGroup) {
-        console.log('Showing banner - Test group with 3+ page views');
+        console.log('[Banner] Showing banner - Test group with 3+ page views');
         setShowBanner(true);
         
         // Capture the banner shown event
