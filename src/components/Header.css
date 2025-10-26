@@ -193,20 +193,38 @@ header.menu-open {
   left: 0;
   right: 0;
   bottom: 0;
+  min-height: 100vh; /* Fallback for browsers that don't support dvh */
+  min-height: 100dvh; /* Uses dynamic viewport height */
+  width: 100vw;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 1001; /* Below header but above page content */
+  z-index: 1001;
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
+  /* Ensure it covers the entire viewport on iOS */
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  /* Fix for iOS Safari 15+ */
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
 }
 
 .menu-overlay--open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+
+/* Fix for iOS address bar */
+@supports (-webkit-touch-callout: none) {
+  .menu-overlay {
+    position: fixed;
+    height: -webkit-fill-available;
+  }
 }
 
 .menu-overlay--open {
