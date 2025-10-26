@@ -67,6 +67,25 @@ header.menu-open {
   z-index: 2; /* Above the background but below the menu button */
 }
 
+/* Logo link styles */
+.navbar-container > a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar-container > a:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.navbar-container > a:active {
+  transform: scale(0.98);
+}
+
 .navbar-container--top {
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
