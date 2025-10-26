@@ -93,17 +93,19 @@ const Header = () => {
             />
           </Link>
 
-          {/* Menu button for all viewports */}
+          {/* Modern animated menu button */}
           <button 
             className="menu-button"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="main-navigation"
           >
-            <div className="menu-icon">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+            <span className="menu-icon">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </span>
           </button>
         </div>
       </header>
