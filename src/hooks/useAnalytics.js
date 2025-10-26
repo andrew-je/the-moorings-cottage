@@ -1,84 +1,123 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { usePostHog } from 'posthog-js/react';
+import { posthogTracking } from '../services/posthogTracking';
 
 // Hook for tracking page views and scroll depth
 export const usePageTracking = () => {
   const location = useLocation();
-  const posthog = usePostHog();
   const startTime = useRef(Date.now());
   const lastScrollDepth = useRef(0);
 
   useEffect(() => {
-    if (!posthog) return;
-    // Track page view when location changes
-    const pageTitle = document.title;
-    posthog.capture('$pageview', { path: location.pathname, title: pageTitle });
-    
-    // Reset timer for new page
-    startTime.current = Date.now();
-    lastScrollDepth.current = 0;
+    try {
+      // Track page view when location changes
+      const pageTitle = document.title;
+      posthogTracking.trackPageView(location.pathname, pageTitle);
+      
+      // Reset timer for new page
+      startTime.current = Date.now();
+      lastScrollDepth.current = 0;
+    } catch (error) {
+      console.error('Error tracking page view:', error);
+    }
 
     // Track time on page when component unmounts
     return () => {
-      const timeOnPage = (Date.now() - startTime.current) / 1000;
-      posthog.capture('time on page', { seconds: timeOnPage });
+      try {
+        const timeOnPage = (Date.now() - startTime.current) / 1000;
+        posthogTracking.track('time on page', { seconds: timeOnPage });
+      } catch (error) {
+        console.error('Error tracking time on page:', error);
+      }
     };
-  }, [location, posthog]);
+  }, [location]);
 
   useEffect(() => {
-    if (!posthog) return;
     // Track scroll depth
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-      
-      if (scrollPercent > lastScrollDepth.current) {
-        posthog.capture('scroll depth', { percent: scrollPercent });
-        lastScrollDepth.current = scrollPercent;
+      try {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+        
+        if (scrollPercent > lastScrollDepth.current) {
+          posthogTracking.track('scroll depth', { percent: scrollPercent });
+          lastScrollDepth.current = scrollPercent;
+        }
+      } catch (error) {
+        console.error('Error tracking scroll depth:', error);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [posthog]);
+  }, []);
 };
 
 // Hook for tracking user interactions
 export const useAnalytics = () => {
-  const posthog = usePostHog();
-
   const trackBooking = (action, details = {}) => {
-    posthog?.capture('booking', { action, ...details });
+    try {
+      posthogTracking.trackBookingAction(action, details);
+    } catch (error) {
+      console.error('Error tracking booking:', error);
+    }
   };
 
   const trackContact = (method) => {
-    posthog?.capture('contact', { method });
+    try {
+      posthogTracking.track('contact', { method });
+    } catch (error) {
+      console.error('Error tracking contact:', error);
+    }
   };
 
   const trackGallery = (action, imageIndex) => {
-    posthog?.capture('gallery', { action, imageIndex });
+    try {
+      posthogTracking.trackGalleryView(imageIndex);
+    } catch (error) {
+      console.error('Error tracking gallery:', error);
+    }
   };
 
   const trackVideo = (action, videoTitle) => {
-    posthog?.capture('video', { action, videoTitle });
+    try {
+      posthogTracking.track('video', { action, videoTitle });
+    } catch (error) {
+      console.error('Error tracking video:', error);
+    }
   };
 
   const trackSocial = (platform) => {
-    posthog?.capture('social', { platform });
+    try {
+      posthogTracking.track('social', { platform });
+    } catch (error) {
+      console.error('Error tracking social:', error);
+    }
   };
 
   const trackExternalLink = (url, linkText) => {
-    posthog?.capture('external link', { url, linkText });
+    try {
+      posthogTracking.track('external link', { url, linkText });
+    } catch (error) {
+      console.error('Error tracking external link:', error);
+    }
   };
 
   const trackFormSubmission = (formName) => {
-    posthog?.capture('form submission', { formName });
+    try {
+      posthogTracking.trackFormSubmission(formName);
+    } catch (error) {
+      console.error('Error tracking form submission:', error);
+    }
   };
 
   const trackEvent = (action, category, label, value) => {
-    posthog?.capture(action, { category, label, value });
+    try {
+      posthogTracking.track(action, { category, label, value });
+    } catch (error) {
+      console.error('Error tracking event:', error);
+    }
   };
 
   return {
