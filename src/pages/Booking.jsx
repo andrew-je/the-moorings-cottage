@@ -14,8 +14,8 @@ const Booking = () => {
               <h6>Important Information</h6>
               <ul>
                 <li>Change-over days are Friday, with the exception of Christmas and New Year</li>
-                <li>Check-in time: 5pm onwards</li>
-                <li>Check-out time: 9am</li>
+                <li>Check-in time: 3pm onwards</li>
+                <li>Check-out time: 9.30am</li>
                 <li>Minimum stay: 3 nights</li>
                 <li>Maximum occupancy: 4 guests</li>
               </ul>
