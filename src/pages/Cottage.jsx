@@ -22,11 +22,11 @@ const Cottage = () => {
                     </tr>
                     <tr>
                       <td><span>Check in time</span></td>
-                      <td><p>5pm onwards</p></td>
+                      <td><p>3pm onwards</p></td>
                     </tr>
                     <tr>
                       <td><span>Check out time</span></td>
-                      <td><p>9am</p></td>
+                      <td><p>9.30am</p></td>
                     </tr>
                     <tr>
                       <td><span>Parking</span></td>
